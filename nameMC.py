@@ -1,26 +1,27 @@
 from selenium import webdriver
-import json
-import requests
-import time
+import json, requests, time
 
+# Browser used by the bot
 driver = webdriver.Firefox()
 
-friendsList = requests.get('https://api.namemc.com/profile/b4769eac-1010-405a-b668-04a07b2f20f3/friends')
-friendsNames = json.loads(friendsList.text)
-
-driver.get("https://namemc.com/login")
-x = input("Press enter after you have logged in. ")
-print(" ")
-
+# Replace this with some other friends list if you want!
+apiLink = "https://api.namemc.com/profile/b4769eac-1010-405a-b668-04a07b2f20f3/friends"
 waitTime = 60
 x = 0
 
-for i in friendsNames:
+friendsList = requests.get(apiLink)
+friendsNames = json.loads(friendsList.text)
 
+# You have to login or else it doesn't work
+driver.get("https://namemc.com/login")
+t = input("Press enter after you have logged in. ")
+print(" ")
+
+for i in friendsNames:
 	while x <= waitTime:
 		time.sleep(1)
 		timeRemaining = waitTime - x
-		print("Wait: " + str(timeReamining) + " Seconds")
+		print("Wait: " + str(timeRemaining) + " Seconds")
 		x += 1
 	x = 0
 
@@ -31,11 +32,6 @@ for i in friendsNames:
 	except:
 		print(" ")
 		print("I can't find the button, skipping it!")
+		
 	print("Username: " + i["name"])
 	print(" ")
-
-
-
-
-
-
