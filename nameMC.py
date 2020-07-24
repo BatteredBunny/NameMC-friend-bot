@@ -68,3 +68,4 @@ for i in friendsNames:
 		print("Request sent, waiting " + str(waitTime) + " Seconds")
 
 	time.sleep(waitTime)
+print("Done, have a nice day!")
