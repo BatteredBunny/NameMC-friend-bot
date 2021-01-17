@@ -35,37 +35,34 @@ try:
 	emailField.send_keys(username)
 	submitButton.click()
 except:
-	print(" ")
-	t = input("Please complete the captcha then press enter.")
+	t = input("\nPlease complete the captcha then press enter.")
 
-	# password, username and submit fields for the bot to use them
+	# Gets password, username and submit button form fields
 	emailField = driver.find_element_by_id("email")
 	passwordField = driver.find_element_by_id("password")
 	submitButton = driver.find_element_by_xpath("//button[@class='btn btn-primary']")
 
-	#send the inputs and clicks button
+	#send inputs to form fields and clicks button
 	passwordField.send_keys(password)
 	emailField.send_keys(username)
 	submitButton.click()
 
 for i in friendsNames:
 
+	# Opens profile 
 	driver.get("https://namemc.com/profile/" + i["name"])
-
-	print(" ")
-	print("Username: " + i["name"] + " UUID: " + i["uuid"])
+	print("\nUsername: " + i["name"] + " UUID: " + i["uuid"])
 
 	try:
-
+		# Finds and clicks friend button
 		button = driver.find_element_by_id('add-friend-button')
 		button.click()
-
 	except:
 		print("I already sent friend request to them. (Or im not logged in)")
 		print("Waiting " + str(waitTime) + " Seconds")
-
 	else:
 		print("Request sent, waiting " + str(waitTime) + " Seconds")
 
+	# Waits certain time to follow ratelimit
 	time.sleep(waitTime)
 print("Done, have a nice day!")
